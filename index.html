@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Vertical Innovations - Technology Solutions</title>
+    <link rel="icon" href="assets/img/gvi.png" type="image/x-icon">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.475.0/dist/umd/lucide.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .section {
+            scroll-margin-top: 5rem;
+        }
+
+        .nav-link.active {
+            color: rgb(37, 99, 235) !important;
+            font-weight: 500;
+        }
+
+        @keyframes bounce-subtle {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .hover-bounce:hover {
+            animation: bounce-subtle 1s infinite;
+        }
+
+        /** Mega menu **/
+        .mega-menu {
+            opacity: 0;
+            transform: translateY(-8px) scale(0.98);
+            visibility: hidden;
+            transition:
+                opacity 0.2s ease-out,
+                transform 0.2s ease-out,
+                visibility 0s linear 0.2s;
+            pointer-events: none;
+            transform-origin: top center;
+        }
+
+        .mega-menu.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            visibility: visible;
+            pointer-events: auto;
+            transition:
+                opacity 0.3s ease-out,
+                transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .product-card {
+            transition: all 0.2s ease-out;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .mega-menu.show .product-card {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for cards */
+        .mega-menu.show .product-card:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .mega-menu.show .product-card:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+
+        .mega-menu.show .product-card:nth-child(3) {
+            transition-delay: 0.2s;
+        }
+
+        .mega-menu.show .product-card:nth-child(4) {
+            transition-delay: 0.25s;
+        }
+
+        .chevron {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .rotate-chevron {
+            transform: rotate(180deg);
+        }
+
+        .client-logo {
+            width: 100px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(
+                135deg,
+                rgba(37, 99, 235, 1) 0%,
+                rgba(59, 130, 246, 0.9) 100%
+            );
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .btn-shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(37, 99, 235, 0.8) 0%,
+                rgba(59, 130, 246, 0.9) 100%
+            );
+            opacity: 0;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transform: translateX(-100%);
+            transition: transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        
+        .btn-shine:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.5);
+        }
+        
+        .btn-shine:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-shine:hover::after {
+            transform: translateX(100%);
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-shine:active {
+            transform: translateY(1px) scale(0.98);
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .arrow-icon {
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .btn-shine:hover .arrow-icon {
+            transform: translateX(8px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+    </style>
+</head>
+
+<body class="font-sans">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-sm z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo SVG -->
+                <a href="#home" class="flex items-center">
+                    <img src="assets/img/gvi.svg" alt="GVI Logo" class="h-10 w-auto">
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-link text-gray-600 hover:text-blue-600 transition-colors"
+                        data-section="home">Home</a>
+                    <a href="#services" class="nav-link text-gray-600 hover:text-blue-600 transition-colors"
+                        data-section="services">Services</a>
+                    <!-- <a href="#clients" class="nav-link text-gray-600 hover:text-blue-600 transition-colors"
+                        data-section="clients">Clients</a> -->
+                    <a href="#c" id="menuButton"
+                        class="nav-link inline-flex text-gray-600 hover:text-blue-600 transition-colors">
+                        <span class="font-medium">Clients</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 20 20" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="ml-1 mt-1 chevron">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </a>
+                    <a href="#technologies" class="nav-link text-gray-600 hover:text-blue-600 transition-colors"
+                        data-section="technologies">Technologies</a>
+                    <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors"
+                        data-section="contact">Contact Us</a>
+
+
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none" aria-label="Toggle Menu">
+                <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        </div>
+
+        <!-- Mobile Menu (hidden by default) -->
+        <div id="mobile-menu" class="md:hidden hidden transition-all duration-300 ease-in-out">
+            <div class="px-4 py-3 space-y-3 bg-white shadow-lg">
+                <a href="#home" class="nav-link block text-gray-600 hover:text-blue-600" data-section="home">Home</a>
+                <a href="#services" class="nav-link block text-gray-600 hover:text-blue-600"
+                    data-section="services">Services</a>
+                <a href="#clients" class="nav-link block text-gray-600 hover:text-blue-600"
+                    data-section="clients">Clients</a>
+                <a href="#technologies" class="nav-link block text-gray-600 hover:text-blue-600"
+                    data-section="technologies">Technologies</a>
+                <a href="#contact" class="nav-link text-gray-600 hover:text-blue-600 transition-colors"
+                    data-section="contact">Contact Us</a>
+            </div>
+        </div>
+
+        <div id="megaMenu" class="mega-menu absolute left-0 right-0 bg-white mt-1 shadow-lg rounded-lg z-50 max-w-7xl mx-auto">
+            <div class="max-w-7xl mx-auto p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Client Cards -->
+                    <div class="product-card p-4 rounded-lg hover:bg-gray-50">
+                        <div class="flex items-start space-x-4">
+                            <img src="assets/img/Acosta_logo-300x102.png"
+                                alt="PictureThis!" class="client-logo">
+                            <div>
+                                <h3 class="product-title font-medium text-gray-900 group-hover:text-blue-600">
+                                    PictureThis! (ACOSTA)</h3>
+                                <p class="mt-1 text-sm text-gray-500">Developed an automated file delivery
+                                    system for clients unfamiliar with FTP or standardized download systems.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card p-4 rounded-lg hover:bg-gray-50">
+                        <div class="flex items-start space-x-4">
+                            <img src="assets/img/TDC-300x73.png"
+                                alt="The Data Council" class="client-logo">
+                            <div>
+                                <h3 class="product-title font-medium text-gray-900 group-hover:text-blue-600">
+                                    The Data Council (IX-ONE)</h3>
+                                <p class="mt-1 text-sm text-gray-500">Serving as the primary technology team
+                                    since 2016, we've led comprehensive software development and support
+                                    operations.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card p-4 rounded-lg hover:bg-gray-50">
+                        <div class="flex items-start space-x-4">
+                            <img src="assets/img/fiqs.png" alt="FIQS, LLC"
+                                class="client-logo">
+                            <div>
+                                <h3 class="product-title font-medium text-gray-900 group-hover:text-blue-600">
+                                    FIQS, LLC</h3>
+                                <p class="mt-1 text-sm text-gray-500">Developed The Vault, an
+                                    industry-leading LIMS solution for food manufacturing facilities.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card p-4 rounded-lg hover:bg-gray-50">
+                        <div class="flex items-start space-x-4">
+                            <img src="assets/img/MoreRecycling_Logo.jpg"
+                                alt="More Recycling" class="client-logo">
+                            <div>
+                                <h3 class="product-title font-medium text-gray-900 group-hover:text-blue-600">
+                                    More Recycling</h3>
+                                <p class="mt-1 text-sm text-gray-500">Successfully delivered multiple
+                                    marketing and project-based websites.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card p-4 rounded-lg hover:bg-gray-50 col-span-2" id="view-detail">
+                        <div class="flex items-center justify-center space-x-2 text-blue-600 hover:text-blue-700">
+                            <a href="#clients" class="btn-shine inline-flex items-center justify-center px-6 py-4 text-md font-medium text-white rounded-xl shadow-lg group">
+                                <span class="btn-content inline-flex items-center">
+                                    <span class="text-white mr-2 tracking-wide">VIEW DETAILS</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 arrow-icon">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </nav>
+
+    <!-- Main Content Sections -->
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <!-- Hero Slider Content from index.html -->
+            <div class="relative h-screen">
+                <div class="relative h-screen">
+                    <div class="absolute inset-0 z-0">
+                        <!-- Slide 1: Innovation Focus -->
+                        <div id="slide1" class="absolute inset-0 transition-opacity duration-500">
+                            <img src="assets/img/slide1.jpg" alt="Technology Innovation"
+                                class="object-cover w-full h-full">
+                            <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50">
+                                <div class="container mx-auto px-6 h-full flex items-center">
+                                    <div class="max-w-2xl text-white">
+                                        <h1 class="text-5xl font-bold mb-6">Innovate Beyond Boundaries</h1>
+                                        <p class="text-xl">Break free from one-size-fits-all solutions. Our custom
+                                            software
+                                            development transforms your unique business vision into powerful, tailored
+                                            technology
+                                            that sets you apart from the competition.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2: Partnership Approach -->
+                        <div id="slide2" class="absolute inset-0 opacity-0 transition-opacity duration-500">
+                            <img src="assets/img/slide2.jpg" alt="Strategic Partnership"
+                                class="object-cover w-full h-full">
+                            <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50">
+                                <div class="container mx-auto px-6 h-full flex items-center">
+                                    <div class="max-w-2xl text-white">
+                                        <h1 class="text-5xl font-bold mb-6">Your Vision, Our Expertise</h1>
+                                        <p class="text-xl">From individual projects to full department outsourcing, we
+                                            adapt our
+                                            services to match your exact needs. Experience technology partnership that
+                                            evolves with
+                                            your business.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3: Technical Excellence -->
+                        <div id="slide3" class="absolute inset-0 opacity-0 transition-opacity duration-500">
+                            <img src="assets/img/slide3.jpg" alt="Technical Excellence"
+                                class="object-cover w-full h-full">
+                            <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50">
+                                <div class="container mx-auto px-6 h-full flex items-center">
+                                    <div class="max-w-2xl text-white">
+                                        <h1 class="text-5xl font-bold mb-6">Engineering Excellence Delivered</h1>
+                                        <p class="text-xl">Our senior developers bring decades of experience across
+                                            industries.
+                                            Leverage our technical mastery to build robust, scalable solutions that
+                                            drive your
+                                            business forward.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide 4: Results Focus -->
+                        <div id="slide4" class="absolute inset-0 opacity-0 transition-opacity duration-500">
+                            <img src="assets/img/slide4.jpg" alt="Business Results" class="object-cover w-full h-full">
+                            <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50">
+                                <div class="container mx-auto px-6 h-full flex items-center">
+                                    <div class="max-w-2xl text-white">
+                                        <h1 class="text-5xl font-bold mb-6">Guaranteed Project Success</h1>
+                                        <p class="text-xl">With our "Not To Exceed" promise, your projects stay on
+                                            budget and on
+                                            schedule. We deliver results you can count on, backed by our commitment to
+                                            excellence.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section Content from index.html -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="grid md:grid-cols-3 gap-12">
+                        <!-- Custom Solutions -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-4">Custom Solutions</h3>
+                            <p class="text-gray-600">Tailored software solutions designed specifically for your business
+                                needs
+                                and goals, ensuring perfect alignment with your processes.</p>
+                        </div>
+
+                        <!-- Staff Augmentation -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-4">Staff Augmentation</h3>
+                            <p class="text-gray-600">Seamlessly integrate our skilled professionals into your team,
+                                scaling your
+                                capabilities with experienced developers.</p>
+                        </div>
+
+                        <!-- Full Outsourcing -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M20 7h-9"></path>
+                                    <path d="M14 17H5"></path>
+                                    <circle cx="17" cy="17" r="3"></circle>
+                                    <circle cx="7" cy="7" r="3"></circle>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-4">Full IT Outsourcing</h3>
+                            <p class="text-gray-600">Comprehensive technology management services, handling all your
+                                development
+                                and support needs with expertise.</p>
+                        </div>
+
+                        <!-- Not To Exceed Promise -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-4">"Not To Exceed" Promise</h3>
+                            <p class="text-gray-600">Guaranteed project delivery within budget and timeline, backed by
+                                our
+                                commitment to transparent pricing.</p>
+                        </div>
+
+                        <!-- Technology Expertise -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-4">Technology Mastery</h3>
+                            <p class="text-gray-600">Expertise in latest technologies including .NET, SQL Server,
+                                Sencha,
+                                Oracle, and various NoSQL databases.</p>
+                        </div>
+
+                        <!-- Industry Experience -->
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full h-full" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path
+                                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-4">Cross-Industry Expertise</h3>
+                            <p class="text-gray-600">Proven success across multiple industries including CPG, banking,
+                                energy
+                                trading, and correctional facilities.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <section class="bg-gradient-to-r from-blue-600 to-blue-800">
+                <div class="bg-gradient-to-r from-blue-600 to-blue-800 py-20">
+                    <div class="container mx-auto px-6 text-center">
+                        <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Our Services</h1>
+                        <p class="text-xl text-white/90 max-w-3xl mx-auto">
+                            Comprehensive technology solutions tailored to your business needs, backed by our "Not To
+                            Exceed" promise
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Staff Augmentation -->
+                <div class="py-20 bg-white">
+                    <div class="container mx-auto px-6">
+                        <div
+                            class="max-w-6xl mx-auto bg-gradient-to-br from-blue-50 to-white rounded-xl shadow-lg p-8 border border-blue-100">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                <div class="order-2 lg:order-1">
+                                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Staff Augmentation</h2>
+                                    <div class="prose prose-lg text-gray-600">
+                                        <p class="mb-6">
+                                            Enhance your team with our skilled professionals who seamlessly integrate
+                                            into your organization.
+                                        </p>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <ul class="space-y-4">
+                                                <li class="flex items-start">
+                                                    <i data-lucide="user-plus"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Direct team integration</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="users"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Dedicated project management</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="git-merge"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Flexible team scaling</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="space-y-4">
+                                                <li class="flex items-start">
+                                                    <i data-lucide="clock"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Full-time or part-time</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="award"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Certified professionals</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="trending-up"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Skill development support</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-1 lg:order-2 flex justify-center">
+                                    <div class="w-48 h-48 text-blue-600">
+                                        <i data-lucide="user-cog" class="w-48 h-48"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Full IT Outsourcing -->
+                <div class="py-20 bg-gray-50">
+                    <div class="container mx-auto px-6">
+                        <div class="max-w-6xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                <div class="flex justify-center">
+                                    <div class="w-48 h-48 text-blue-600">
+                                        <i data-lucide="cpu" class="w-48 h-48"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Full IT Outsourcing</h2>
+                                    <div class="prose prose-lg text-gray-600">
+                                        <p class="mb-6">
+                                            Transform your technology operations with our comprehensive outsourcing
+                                            solution.
+                                        </p>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <ul class="space-y-4">
+                                                <li class="flex items-start">
+                                                    <i data-lucide="code"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Application development</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="wrench"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Technical support</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="settings"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Infrastructure management</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="space-y-4">
+                                                <li class="flex items-start">
+                                                    <i data-lucide="shield"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Security monitoring</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="database"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Data management</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="activity"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>24/7 system monitoring</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Development -->
+                <div class="py-20 bg-white">
+                    <div class="container mx-auto px-6">
+                        <div
+                            class="max-w-6xl mx-auto bg-gradient-to-br from-gray-50 to-white rounded-xl shadow-lg p-8 border border-gray-100">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                                <div class="order-2 lg:order-1">
+                                    <h2 class="text-3xl font-bold mb-6 text-gray-800">Custom Development</h2>
+                                    <div class="prose prose-lg text-gray-600">
+                                        <p class="mb-6">
+                                            Build tailored software solutions that perfectly align with your business
+                                            processes.
+                                        </p>
+                                        <div class="grid md:grid-cols-2 gap-6">
+                                            <ul class="space-y-4">
+                                                <li class="flex items-start">
+                                                    <i data-lucide="clipboard-list"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Requirements analysis</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="puzzle"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Architecture design</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="rocket"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Agile development</span>
+                                                </li>
+                                            </ul>
+                                            <ul class="space-y-4">
+                                                <li class="flex items-start">
+                                                    <i data-lucide="zap"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Performance optimization</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="smartphone"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Mobile development</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <i data-lucide="cloud"
+                                                        class="w-6 h-6 mr-3 text-blue-600 flex-shrink-0 mt-1"></i>
+                                                    <span>Cloud solutions</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-1 lg:order-2 flex justify-center">
+                                    <div class="w-48 h-48 text-blue-600">
+                                        <i data-lucide="code-2" class="w-48 h-48"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Additional Services Grid -->
+                <div class="py-20 bg-gray-50">
+                    <div class="container mx-auto px-6">
+                        <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Additional Services</h2>
+                        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                            <!-- Cloud Solutions -->
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <div class="w-12 h-12 text-blue-600 mb-4">
+                                    <i data-lucide="cloud" class="w-12 h-12"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4">Cloud Solutions</h3>
+                                <p class="text-gray-600">
+                                    Leverage cloud technologies for scalable, secure, and cost-effective infrastructure
+                                    solutions.
+                                </p>
+                            </div>
+
+                            <!-- AI & Machine Learning -->
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <div class="w-12 h-12 text-blue-600 mb-4">
+                                    <i data-lucide="brain" class="w-12 h-12"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4">AI & Machine Learning</h3>
+                                <p class="text-gray-600">
+                                    Implement cutting-edge AI solutions to automate processes and gain valuable
+                                    insights.
+                                </p>
+                            </div>
+
+                            <!-- DevOps Services -->
+                            <div class="bg-white p-6 rounded-xl shadow-lg">
+                                <div class="w-12 h-12 text-blue-600 mb-4">
+                                    <i data-lucide="git-branch" class="w-12 h-12"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4">DevOps Services</h3>
+                                <p class="text-gray-600">
+                                    Streamline development and operations with modern DevOps practices and tools.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Clients Section -->
+        <section id="clients" class="section" onfocus="myFunction(this)">
+            <section class="pt-32 pb-20 bg-gradient-to-r from-blue-600 to-blue-800">
+                <div class="container mx-auto px-6 text-center text-white">
+                    <h1 class="text-5xl font-bold mb-6">Success Stories</h1>
+                    <p class="text-xl max-w-3xl mx-auto text-white/90">
+                        Discover how we've helped industry leaders transform their businesses through innovative
+                        technology
+                        solutions and strategic partnerships.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Client Success Stories -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <!-- PictureThis! (ACOSTA) -->
+                    <div class="mb-20 max-w-6xl mx-auto">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="flex flex-col lg:flex-row">
+                                <div class="lg:w-2/5 p-8 bg-gray-50 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <img src="assets/img/Acosta_logo-300x102.png"
+                                            alt="Acosta Logo" class="mx-auto mb-6 max-w-[200px]">
+
+                                    </div>
+                                </div>
+                                <div class="lg:w-3/5 p-8">
+                                    <h3 class="text-2xl font-bold mb-4">PictureThis! (ACOSTA)</h3>
+                                    <p class="text-gray-600 mb-6">
+                                        Developed an automated file delivery system for clients unfamiliar with FTP or
+                                        standardized download systems. Our solution featured:
+                                    </p>
+                                    <ul class="space-y-3 text-gray-600">
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Zero-deployment client access system</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Comprehensive connection tracking</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Secure file transfer management</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- The Data Council -->
+                    <div class="mb-20 max-w-6xl mx-auto">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="flex flex-col lg:flex-row">
+                                <div class="lg:w-2/5 p-8 bg-gray-50 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <img src="assets/img/TDC-300x73.png"
+                                            alt="The Data Council Logo" class="mx-auto mb-6 max-w-[200px]">
+
+                                    </div>
+                                </div>
+                                <div class="lg:w-3/5 p-8">
+                                    <h3 class="text-2xl font-bold mb-4">The Data Council (IX-ONE)</h3>
+                                    <p class="text-gray-600 mb-6">
+                                        Serving as the primary technology team since 2016, we've led comprehensive
+                                        software
+                                        development and support operations:
+                                    </p>
+                                    <ul class="space-y-3 text-gray-600">
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>End-to-end business analysis and application design</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Full-scale development and operations support</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>CPG product information and imagery management</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FIQS -->
+                    <div class="mb-20 max-w-6xl mx-auto">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="flex flex-col lg:flex-row">
+                                <div class="lg:w-2/5 p-8 bg-gray-50 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <img src="assets/img/fiqs.png"
+                                            alt="FIQS Logo" class="mx-auto mb-6 max-w-[200px]">
+
+                                    </div>
+                                </div>
+                                <div class="lg:w-3/5 p-8">
+                                    <h3 class="text-2xl font-bold mb-4">FIQS, LLC</h3>
+                                    <p class="text-gray-600 mb-6">
+                                        Developed The Vault, an industry-leading LIMS solution for food manufacturing
+                                        facilities:
+                                    </p>
+                                    <ul class="space-y-3 text-gray-600">
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Comprehensive product & site testing capabilities</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Advanced auditing and training management</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Streamlined manufacturing facility operations</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More Recycling -->
+                    <div class="mb-20 max-w-6xl mx-auto">
+                        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                            <div class="flex flex-col lg:flex-row">
+                                <div class="lg:w-2/5 p-8 bg-gray-50 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <img src="assets/img/MoreRecycling_Logo.jpg"
+                                            alt="More Recycling Logo" class="mx-auto mb-6 max-w-[200px]">
+
+                                    </div>
+                                </div>
+                                <div class="lg:w-3/5 p-8">
+                                    <h3 class="text-2xl font-bold mb-4">More Recycling</h3>
+                                    <p class="text-gray-600 mb-6">
+                                        Successfully delivered multiple marketing and project-based websites:
+                                    </p>
+                                    <ul class="space-y-3 text-gray-600">
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Seamless transition from existing development team</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Critical project delivery for company initiatives</span>
+                                        </li>
+                                        <li class="flex items-start">
+                                            <i data-lucide="check-circle"
+                                                class="w-6 h-6 text-green-500 mr-2 flex-shrink-0"></i>
+                                            <span>Enhanced business informatics presentation</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Technologies Section -->
+        <section id="technologies" class="section">
+            <section class="pt-32 pb-20 bg-gradient-to-r from-blue-600 to-blue-800">
+                <div class="container mx-auto px-6 text-center text-white">
+                    <h1 class="text-5xl font-bold mb-6">Cutting-Edge Technology Stack</h1>
+                    <p class="text-xl max-w-3xl mx-auto text-white/90 mb-8">
+                        Our technical expertise spans across modern development technologies, cloud platforms, and
+                        emerging AI
+                        solutions.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Technology Introduction -->
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="bg-white rounded-xl shadow-sm p-8 mb-12">
+                            <h2 class="text-3xl font-bold mb-6 text-gray-800">Our Technology Approach</h2>
+                            <div class="prose prose-lg text-gray-600">
+                                <p class="mb-6">
+                                    At Global Vertical Innovations, our team brings together a comprehensive set of
+                                    skills
+                                    across development technologies, operating systems, and databases. We believe in
+                                    matching
+                                    the right expertise to your specific technology environment, ensuring a perfect fit
+                                    for your
+                                    business needs.
+                                </p>
+                                <p class="mb-6">
+                                    What sets us apart is our commitment to transparency and honesty. Unlike
+                                    organizations that
+                                    might overpromise and under-deliver, we're upfront about our capabilities. If a
+                                    specific
+                                    skillset isn't currently within our team's expertise, we'll tell you directly –
+                                    because we
+                                    believe in building lasting partnerships based on trust.
+                                </p>
+                                <p>
+                                    Our success is intrinsically linked to our clients' success. That's why we take
+                                    immense
+                                    pride in our work, constantly expanding our technical capabilities while maintaining
+                                    the
+                                    highest standards of quality in everything we do.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <!-- Backend & Cloud -->
+                    <div class="mb-20">
+                        <h2 class="text-3xl font-bold mb-12 text-center">Backend & Cloud Technologies</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <!-- .NET -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="monitor-down" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">.NET Ecosystem</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• .NET Core & .NET 6/7/8</li>
+                                    <li>• ASP.NET Core WebAPI</li>
+                                    <li>• Entity Framework Core</li>
+                                    <li>• Microservices Architecture</li>
+                                </ul>
+                            </div>
+
+                            <!-- Cloud -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="cloud-cog" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">Google Cloud Platform</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• GCP Infrastructure</li>
+                                    <li>• Cloud Run & Cloud Functions</li>
+                                    <li>• Cloud Storage & BigQuery</li>
+                                    <li>• Kubernetes Engine</li>
+                                </ul>
+                            </div>
+
+                            <!-- Databases -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="database" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">Database Technologies</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• MongoDB</li>
+                                    <li>• Elasticsearch</li>
+                                    <li>• SQL Server</li>
+                                    <li>• Redis Cache</li>
+                                </ul>
+                            </div>
+
+                            <!-- DevOps -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="git-branch" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">DevOps & CI/CD</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• Docker & Kubernetes</li>
+                                    <li>• GitHub Actions</li>
+                                    <li>• Azure DevOps</li>
+                                    <li>• Terraform</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Frontend & Mobile -->
+                    <div class="mb-20">
+                        <h2 class="text-3xl font-bold mb-12 text-center">Frontend & Mobile Technologies</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- React -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="blocks" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">React Ecosystem</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• React & React Native</li>
+                                    <li>• Next.js & Redux</li>
+                                    <li>• Material-UI & Tailwind</li>
+                                    <li>• TypeScript</li>
+                                </ul>
+                            </div>
+
+                            <!-- Mobile -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="smartphone" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">Mobile Development</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• iOS & Android Native</li>
+                                    <li>• React Native</li>
+                                    <li>• Progressive Web Apps</li>
+                                    <li>• Cross-platform Solutions</li>
+                                </ul>
+                            </div>
+
+                            <!-- UI Frameworks -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="paintbrush" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">UI Frameworks</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• Sencha Ext JS</li>
+                                    <li>• Tailwind CSS</li>
+                                    <li>• Bootstrap</li>
+                                    <li>• Material Design</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI & Machine Learning -->
+                    <div>
+                        <h2 class="text-3xl font-bold mb-12 text-center">AI & Machine Learning</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <!-- Computer Vision -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="eye" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">Computer Vision</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• Object Detection</li>
+                                    <li>• Image Recognition</li>
+                                    <li>• OpenCV</li>
+                                    <li>• TensorFlow</li>
+                                </ul>
+                            </div>
+
+                            <!-- Generative AI -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="brain" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">Generative AI</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• Large Language Models</li>
+                                    <li>• OpenAI Integration</li>
+                                    <li>• Text Generation</li>
+                                    <li>• AI-assisted Development</li>
+                                </ul>
+                            </div>
+
+                            <!-- ML Ops -->
+                            <div class="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+                                <div class="w-16 h-16 mx-auto mb-6 text-blue-600">
+                                    <i data-lucide="settings" class="w-16 h-16"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-4 text-center">ML Operations</h3>
+                                <ul class="text-gray-600 space-y-2">
+                                    <li>• Model Training & Deployment</li>
+                                    <li>• Data Pipeline Management</li>
+                                    <li>• Performance Monitoring</li>
+                                    <li>• Scalable ML Infrastructure</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section relative bg-gradient-to-r from-blue-600 to-blue-800 py-20 overflow-hidden">
+            <!-- Background Decoration -->
+            <div class="absolute inset-0 opacity-5">
+                <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="0.5" />
+                    </pattern>
+                    <rect width="100" height="100" fill="url(#grid)" />
+                </svg>
+            </div>
+
+            <!-- Decorative Shapes -->
+            <div class="absolute inset-0">
+                <div
+                    class="absolute top-0 left-0 w-96 h-96 bg-white/5 -translate-x-1/2 -translate-y-1/2 rotate-45 blur-3xl">
+                </div>
+                <div
+                    class="absolute bottom-0 right-0 w-128 h-128 bg-white/5 translate-x-1/3 translate-y-1/3 rotate-45 blur-3xl">
+                </div>
+                <!-- Subtle diagonal lines -->
+                <div class="absolute inset-0" style="background-image: linear-gradient(45deg, transparent 98%, rgba(255,255,255,0.1) 99%);
+                    background-size: 30px 30px;"></div>
+            </div>
+
+            <div class="container mx-auto px-6 relative">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-bold text-white mb-4">Contact Us</h2>
+                    <p class="text-xl text-white/90 max-w-2xl mx-auto">
+                        Ready to transform your business with innovative technology solutions? Reach out to our team
+                        today.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                    <!-- Address Card -->
+                    <div
+                        class="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center border border-white/20 transition-all duration-300 hover:bg-white/20">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 text-white hover-bounce">
+                                <i data-lucide="map-pin" class="w-16 h-16"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-white">Our Location</h3>
+                        <p class="text-white/90">
+                            Purdon, TX<br>
+                            United States
+                        </p>
+                    </div>
+
+                    <!-- Email Card -->
+                    <div
+                        class="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center border border-white/20 transition-all duration-300 hover:bg-white/20">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 text-white hover-bounce">
+                                <i data-lucide="mail" class="w-16 h-16"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-white">Email Us</h3>
+                        <a href="mailto:contact@gvi.global" class="text-white/90 hover:text-white transition-colors">
+                            contact@gvi.global
+                        </a>
+                    </div>
+
+                    <!-- Phone Card -->
+                    <div
+                        class="bg-white/10 backdrop-blur-sm rounded-xl p-8 text-center border border-white/20 transition-all duration-300 hover:bg-white/20">
+                        <div class="flex justify-center mb-6">
+                            <div class="w-16 h-16 text-white hover-bounce">
+                                <i data-lucide="phone" class="w-16 h-16"></i>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-4 text-white">Call Us</h3>
+                        <a href="tel:+84902704399" class="text-white/90 hover:text-white transition-colors">
+                            +84 902 704 399
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <!-- Left Side: Logo, Company Name & Links -->
+                <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0">
+                    <!-- Logo -->
+                    <a href="index.html">
+                        <img src="assets/img/gvi.svg" alt="GVI Logo" class="h-8 w-auto brightness-0 invert md:mr-3">
+                    </a>
+
+                    <!-- Company Name and Navigation in same line -->
+                    <div class="flex flex-col md:flex-row items-center md:items-center md:space-x-8">
+                        <span class="text-gray-400 text-sm">Global Vertical Innovations, LLC</span>
+                        <nav class="flex space-x-6">
+                            <a href="#home" class="text-gray-400 hover:text-white text-sm">Home</a>
+                            <a href="#services" class="text-gray-400 hover:text-white text-sm">Services</a>
+                            <a href="#clients" class="text-gray-400 hover:text-white text-sm">Clients</a>
+                            <a href="#technologies" class="text-gray-400 hover:text-white text-sm">Technologies</a>
+                            <a href="#contact" class="text-gray-400 hover:text-white text-sm">Contact Us</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Right Side: Contact & Social -->
+                <div class="flex items-center space-x-6">
+                    <a href="mailto:contact@gvi.global" class="text-gray-400 hover:text-white text-sm flex items-center">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        contact@gvi.global
+                    </a>
+                    <a href="https://www.facebook.com/gvihcm" class="text-gray-400 hover:text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M18.77,7.46H14.5v-1.9c0-.9.6-1.1,1-1.1h3V.5L14.84.5C10.44.5,9.5,3.44,9.5,5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4Z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for section highlighting
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px',
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const sectionId = entry.target.id;
+                    updateActiveNav(sectionId);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        function updateActiveNav(sectionId) {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('data-section') === sectionId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+
+        // Handle navigation clicks
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const isExpanded = !mobileMenu.classList.contains('hidden');
+            menuButton.setAttribute('aria-expanded', isExpanded);
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!menuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+                menuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                mobileMenu.classList.add('hidden');
+                menuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+		// Add this to your existing JavaScript
+		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+			anchor.addEventListener('click', function(e) {
+				e.preventDefault();
+				const targetId = this.getAttribute('href');
+				const targetElement = document.querySelector(targetId);
+				
+				if (targetElement) {
+					targetElement.scrollIntoView({
+						behavior: 'smooth',
+						block: 'start'
+					});
+				}
+			});
+		});
+
+        // Updated slider functionality
+        const slides = [
+            document.getElementById('slide1'),
+            document.getElementById('slide2'),
+            document.getElementById('slide3'),
+            document.getElementById('slide4')
+        ];
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.style.opacity = '0');
+            slides[index].style.opacity = '1';
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Change slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+
+        const menuButton1 = document.getElementById('menuButton');
+        const megaMenu = document.getElementById('megaMenu');
+        const chevron = menuButton1.querySelector('.chevron');
+        const viewDetail = document.getElementById('view-detail');
+        let isOpen = false;
+
+        // Toggle menu
+        menuButton1.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isOpen ? closeMegaMenu() : openMegaMenu();
+        });
+
+        viewDetail.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeMegaMenu();
+        });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isOpen && !menuButton1.contains(e.target) && !megaMenu.contains(e.target)) {
+                closeMegaMenu();
+            }
+        });
+
+        // Close on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isOpen) {
+                closeMegaMenu();
+            }
+        });
+
+        function openMegaMenu() {
+            megaMenu.classList.add('show');
+            chevron.classList.add('rotate-chevron');
+            isOpen = true;
+        }
+
+        function closeMegaMenu() {
+            megaMenu.classList.remove('show');
+            chevron.classList.remove('rotate-chevron');
+            isOpen = false;
+        }
+    </script>
+</body>
+
+</html>
