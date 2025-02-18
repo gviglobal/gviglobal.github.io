@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Vertical Innovations - Technology Solutions</title>
     <link rel="icon" href="assets/img/gvi.png" type="image/x-icon">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.475.0/dist/umd/lucide.min.js"></script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         html {
             scroll-behavior: smooth;
         }
@@ -36,6 +37,18 @@
 
         .hover-bounce:hover {
             animation: bounce-subtle 1s infinite;
+        }
+
+        .company-name {
+            background: linear-gradient(120deg, #2563eb, #3b82f6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .company-logo {
+            transition: transform 0.3s ease;
         }
 
         /** Mega menu **/
@@ -189,8 +202,17 @@
         <div class="container mx-auto px-6 py-3">
             <div class="flex items-center justify-between">
                 <!-- Logo SVG -->
-                <a href="#home" class="flex items-center">
+                <a href="#home" class="flex items-center space-x-5">
                     <img src="assets/img/gvi.svg" alt="GVI Logo" class="h-10 w-auto">
+                    <!-- Company Name -->
+                    <div class="flex flex-col">
+                        <span class="company-name text-xl font-bold tracking-tight">
+                            Global Vertical Innovations
+                        </span>
+                        <span class="text-gray-500 text-sm font-medium tracking-wide">
+                            Elevating Enterprise Solutions
+                        </span>
+                    </div>
                 </a>
 
                 <!-- Desktop Navigation -->
